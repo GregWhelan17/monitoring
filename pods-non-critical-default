@@ -1,0 +1,10 @@
+cloud-optimizer
+consul
+cost
+extractor
+grafana
+metrics-adapter-aws-cloudwatch
+metrics-adapter-aws-performanceinsights
+metrics-adapter-azure-monitormetrics
+sustainability
+#timescaledb
