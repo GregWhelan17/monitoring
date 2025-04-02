@@ -19,7 +19,7 @@ def get_hostname(file):
 # LOGIN
 def turbo_login(hostname,username,password):
     url=f'https://{hostname}/vmturbo/rest/login'
-    # data={'username': 'Administrator', 'password': 'ta5t1c'}
+    # data={'username': 'Administrator', 'password': 'Whelan123!'}
     # data={'username': 'GB-svc-api', 'password': 'getDataFr0mMe!'}
     data={'username': username, 'password': password}
 
