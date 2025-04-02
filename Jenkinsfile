@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'cm-linux' }
+    // agent { label 'cm-linux' }
  
     stages {
         stage("Clone and checkout") {
