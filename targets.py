@@ -79,8 +79,8 @@ def list_bad_targets(targets):
 # turbo_user=sys.argv[1]
 # turbo_pass=sys.argv[2]
 
-turbo_user='GB-svc-api'
-turbo_pass='getDataFr0mMe!'
+turbo_user='administrator'
+turbo_pass='Whelan123!'
 file='turbohost'
 hostname=get_hostname(file)
 cookie=turbo_login(hostname, turbo_user, turbo_pass)
