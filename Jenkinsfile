@@ -46,7 +46,7 @@ pipeline {
                     withKubeConfig([credentialsId: 'service_acc_username_and_password', serverUrl: 'https://192.168.10.45']) {
                     script {
                         println "Kubectl command in separate stage:"
-                        sh """kubectl config set-context --current --namespace=turbonomic"""
+                        sh """/usr/local/bin/kubectl config set-context --current --namespace=turbonomic"""
                         sh """chmod a+x *.sh"""
                         // result= sh (
                         //     script: "./monitor.sh ${username} ${password} ${non-critical-pods} | sed 's/\$/<BR>/' | sed 's/ /\\&nbsp;/g'",
