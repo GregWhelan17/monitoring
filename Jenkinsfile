@@ -34,7 +34,7 @@ pipeline {
                         //     ).trim()
                         // println "Output after the command is run : $output"
                         sh (
-                            "mkdir ~/.kube ; cp config ~/.kube"
+                            "mkdir -p ~/.kube ; cp config ~/.kube"
                         )
                     }
                 }
