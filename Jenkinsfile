@@ -23,16 +23,19 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: "service_acc_username_and_password", passwordVariable: 'password', usernameVariable: 'username')]) {
                     script {
-                        kubectl_command = sh (
-                            script: "curl -k -u ${username}:${password} -X GET https://oidc.${IKP_SERVER}.cloud.uk.hsbc/apitoken/token/user | jq -r '.token.\"kubectl Command\"'",
-                            returnStdout: true
-                        ).trim().replaceAll('\\$TMP_CERT','TMP_CERT').replaceAll(/export TMP_CERT=\$\(mktemp\) && /,'')
+                        // kubectl_command = sh (
+                        //     script: "curl -k -u ${username}:${password} -X GET https://oidc.${IKP_SERVER}.cloud.uk.hsbc/apitoken/token/user | jq -r '.token.\"kubectl Command\"'",
+                        //     returnStdout: true
+                        // ).trim().replaceAll('\\$TMP_CERT','TMP_CERT').replaceAll(/export TMP_CERT=\$\(mktemp\) && /,'')
                         
-                        output = sh (
-                            script: kubectl_command,
-                            returnStdout: true
-                            ).trim()
-                        println "Output after the command is run : $output"
+                        // output = sh (
+                        //     script: kubectl_command,
+                        //     returnStdout: true
+                        //     ).trim()
+                        // println "Output after the command is run : $output"
+                        sh (
+                            "mkdir ~/.kube ; cp config ~/.kube"
+                        )
                     }
                 }
             }
