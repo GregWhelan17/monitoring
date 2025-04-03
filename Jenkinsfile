@@ -45,6 +45,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: "turboAPI", passwordVariable: 'password', usernameVariable: 'username')]) {
                     withKubeConfig([credentialsId: 'service_acc_username_and_password', serverUrl: 'https://192.168.10.45']) {
                     script {
+                        sh """find / -name kubectl"""
                         println "Kubectl command in separate stage:"
                         sh """kubectl config set-context --current --namespace=turbonomic"""
                         sh """chmod a+x *.sh"""
