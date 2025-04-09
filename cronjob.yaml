@@ -13,7 +13,7 @@ spec:
           containers:
           - name: turbomonitor
             image: quay.io/tivolinick/turbomonitor:0.1
-            imagePullPolicy: IfNotPresent
+            imagePullPolicy: Always
             command:
             - /scripts/test.sh
           restartPolicy: OnFailure
