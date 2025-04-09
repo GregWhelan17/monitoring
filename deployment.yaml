@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: turbomonitor
+  namespace: turbomonitor
+  labels:
+    environment: prod
+    team: turbointegrations
+    app: turbomonitor
+    version: "0.1"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: turbomonitor
+  template:
+    metadata:
+      labels:
+        environment: prod
+        team: turbointegrations
+        app: turbomonitor
+        version: "0.1"
+    spec:
+      imagePullSecrets:
+      - name: tivolinick-pull-secret
+      containers:
+      - name: turbomonitor
+        image: quay.io/tivolinick/turbomonitor:0.1
+        imagePullPolicy: Always
+#        env:
+#        - name: TURBOPASS
+#          valueFrom:
+#            secretKeyRef:
+#              name: actionscriptkeys
+#              key: turbopass
+        volumeMounts:
+        - mountPath: /kubeconfig
+          name: kubeconfig
+      volumes:
+      - name: kubeconfig
+        secret:
+          secretName: kube-secret
