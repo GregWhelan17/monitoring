@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: monitor
+  namespace: turbomonitor
+spec:
+  schedule: "*/15 * * * *"
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 90
+      template:
+        spec:
+          containers:
+          - name: turbomonitor
+            image: quay.io/tivolinick/turbomonitor:0.1
+            imagePullPolicy: IfNotPresent
+            command:
+            - /scripts/test.sh
+          restartPolicy: OnFailure

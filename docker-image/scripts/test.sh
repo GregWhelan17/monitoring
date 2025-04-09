@@ -8,7 +8,7 @@ kubectl get ns
 kubectl get pods
 sleep 10
 echo "going: ${count}"
-while [ ${count} -lt 15 ] ; do
+while [ ${count} -lt 10 ] ; do
   count=$(expr ${count} + 1)
   echo "resting: ${count}"
   sleep 60
