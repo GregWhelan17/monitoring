@@ -10,6 +10,8 @@ spec:
       ttlSecondsAfterFinished: 90
       template:
         spec:
+          imagePullSecrets:
+          - name: tivolinick-pull-secret
           containers:
           - name: turbomonitor
             image: quay.io/tivolinick/turbomonitor:0.1
