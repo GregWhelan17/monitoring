@@ -9,6 +9,9 @@ RUN curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | gpg --d
     && apt install kubectl -y
 RUN  python3 -m venv .venv && /.venv/bin/pip install google-cloud-storage
 
+RUN mkdir -p /scripts
+COPY scripts/* /scripts/
+RUN chmod +x /scripts/*
 COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]

@@ -4,7 +4,7 @@ metadata:
   name: monitor
   namespace: turbomonitor
 spec:
-  schedule: "*/15 * * * *"
+  schedule: "*/5 * * * *"
   jobTemplate:
     spec:
       ttlSecondsAfterFinished: 90
