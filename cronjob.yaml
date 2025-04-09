@@ -18,4 +18,17 @@ spec:
             imagePullPolicy: Always
             command:
             - /scripts/test.sh
+    #        env:
+    #        - name: TURBOPASS
+    #          valueFrom:
+    #            secretKeyRef:
+    #              name: actionscriptkeys
+    #              key: turbopass
+            volumeMounts:
+            - mountPath: /kubeconfig
+              name: kubeconfig
+          volumes:
+          - name: kubeconfig
+            secret:
+              secretName: kube-secret
           restartPolicy: OnFailure
