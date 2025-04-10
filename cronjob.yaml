@@ -17,7 +17,7 @@ spec:
             image: quay.io/tivolinick/turbomonitor:0.1
             imagePullPolicy: Always
             command:
-            - /scripts/test.sh
+            - /scripts/runmonitor.sh
     #        env:
     #        - name: TURBOPASS
     #          valueFrom:
