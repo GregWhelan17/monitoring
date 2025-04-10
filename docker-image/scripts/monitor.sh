@@ -4,10 +4,13 @@ DEFAULT_SCRIPTS_ORDER="pods pipeline stale actions targets"
 
 # get Jenkins environment variables
 # usage() { echo "Usage: $0 -u username -p password [-s scripts] [-n noncriticalpods]"; 1>&2; exit 10; }
-usage() { echo "Usage: $0 -u username -p password [-s scripts] [-n noncriticalpods]"; exit 10; }
+usage() { echo "Usage: $0 -t turbohost -u username -p password [-s scripts] [-n noncriticalpods]" }
 
 while getopts "u:p:s:n:" o; do
     case "${o}" in
+        t) 
+            turbohost=$OPTARG
+            ;;
         u) 
             username=$OPTARG
             ;;
@@ -26,8 +29,12 @@ while getopts "u:p:s:n:" o; do
                 noncriticalpods=$(echo $OPTARG | sed 's/,/ /g')
             fi
             ;;
+        h)
+            usage
+            ;;
         *)
             usage
+            exit 10
             ;;
     esac
 done
@@ -37,7 +44,7 @@ bad=0
 for monitor in $scripts ; do
     if [ "${monitor}" == "targets" ] ; then
         # echo "targets.py"
-        result="$(python3 targets.py $username $password)"
+        result="$(python3 targets.py ${turbohost} ${username} ${password})"
         status=$?
         out="${out} ${result}"
         if [ ${status} -gt 0 ] ; then

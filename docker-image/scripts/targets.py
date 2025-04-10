@@ -82,13 +82,10 @@ def list_bad_targets(targets):
 
     # ================================= MAIN =================================
 
-# turbo_user=sys.argv[1]
-# turbo_pass=sys.argv[2]
+hostname=sys.argv[1]
+turbo_user=sys.argv[2]
+turbo_pass=sys.argv[3]
 
-turbo_user='GB-svc-api'
-turbo_pass='getDataFr0mMe!'
-file='turbohost'
-hostname=get_hostname(file)
 cookie=turbo_login(hostname, turbo_user, turbo_pass)
 url=f'https://{hostname}/api/v3/targets'
 targets=get_targets(url=url,cookie=cookie)
