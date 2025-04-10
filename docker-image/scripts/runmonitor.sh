@@ -30,6 +30,7 @@ done
 
 
 
-result=$(./monitor.sh -t turbohost -u turbouser -p turbopass -s scripts -n noncriticalpods)
+echo "./monitor.sh -t ${turbohost} -u ${turbouser} -p ${turbopass} -s ${scripts} -n ${noncriticalpods}"
+result=$(./monitor.sh -t ${turbohost} -u ${turbouser} -p ${turbopass} -s ${scripts} -n ${noncriticalpods})
 
 echo "$result"
