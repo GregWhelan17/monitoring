@@ -27,9 +27,9 @@ spec:
             volumeMounts:
             - mountPath: /kubeconfig
               name: kubeconfig
-            - mountPath: /turbocreds
+            - mountPath: /config/turbocreds
               name: turbocreds
-            - mountPath: /monitorconfig
+            - mountPath: /config/monitorconfig
               name: monitorconfig
           volumes:
           - name: kubeconfig
