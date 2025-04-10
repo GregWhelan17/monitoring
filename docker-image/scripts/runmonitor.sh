@@ -6,7 +6,7 @@ cp /kubeconfig/config ~/.kube/config
 
 echo 'getting configs and secrets'
 for f in /config/*/* ; do
-    case $(basename(${f})) in
+    case $(basename ${f}) in
         noncriticalpods)
             noncriticalpods=$(cat ${f})
             ;;
