@@ -27,8 +27,13 @@ spec:
             volumeMounts:
             - mountPath: /kubeconfig
               name: kubeconfig
+            - mountPath: /monitorconfig
+              name: monitorconfig
           volumes:
           - name: kubeconfig
             secret:
               secretName: kube-secret
+          - name: monitorconfig
+            configmap:
+              name: monitor-config
           restartPolicy: OnFailure
