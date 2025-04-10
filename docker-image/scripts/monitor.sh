@@ -4,9 +4,9 @@ DEFAULT_SCRIPTS_ORDER="pods pipeline stale actions targets"
 
 # get Jenkins environment variables
 # usage() { echo "Usage: $0 -u username -p password [-s scripts] [-n noncriticalpods]"; 1>&2; exit 10; }
-usage() { echo "Usage: $0 -t turbohost -u username -p password [-s scripts] [-n noncriticalpods]" }
+usage() { echo "Usage: $0 -t turbohost -u username -p password [-s scripts] [-n noncriticalpods]" ;}
 
-while getopts "u:p:s:n:" o; do
+while getopts "t:u:p:s:n:h" o; do
     case "${o}" in
         t) 
             turbohost=$OPTARG
