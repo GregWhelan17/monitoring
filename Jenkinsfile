@@ -1,6 +1,5 @@
 pipeline {
-    // agent { label 'cm-linux' }
-    agent any
+    agent { label 'cm-linux' }
  
     stages {
         stage("Clone and checkout") {
@@ -23,19 +22,16 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: "service_acc_username_and_password", passwordVariable: 'password', usernameVariable: 'username')]) {
                     script {
-                        // kubectl_command = sh (
-                        //     script: "curl -k -u ${username}:${password} -X GET https://oidc.${IKP_SERVER}.cloud.uk.hsbc/apitoken/token/user | jq -r '.token.\"kubectl Command\"'",
-                        //     returnStdout: true
-                        // ).trim().replaceAll('\\$TMP_CERT','TMP_CERT').replaceAll(/export TMP_CERT=\$\(mktemp\) && /,'')
+                        kubectl_command = sh (
+                            script: "curl -k -u ${username}:${password} -X GET https://oidc.${IKP_SERVER}.cloud.uk.hsbc/apitoken/token/user | jq -r '.token.\"kubectl Command\"'",
+                            returnStdout: true
+                        ).trim().replaceAll('\\$TMP_CERT','TMP_CERT').replaceAll(/export TMP_CERT=\$\(mktemp\) && /,'')
                         
-                        // output = sh (
-                        //     script: kubectl_command,
-                        //     returnStdout: true
-                        //     ).trim()
-                        // println "Output after the command is run : $output"
-                        sh (
-                            "mkdir -p ~/.kube ; cp config ~/.kube"
-                        )
+                        output = sh (
+                            script: kubectl_command,
+                            returnStdout: true
+                            ).trim()
+                        println "Output after the command is run : $output"
                     }
                 }
             }
@@ -43,9 +39,7 @@ pipeline {
         stage('Monitor') {
             steps {
                 withCredentials([usernamePassword(credentialsId: "turboAPI", passwordVariable: 'password', usernameVariable: 'username')]) {
-                    withKubeConfig([credentialsId: 'service_acc_username_and_password', serverUrl: 'https://192.168.10.45']) {
                     script {
-                        sh """find / -name kubectl 2> /dev/null"""
                         println "Kubectl command in separate stage:"
                         sh """kubectl config set-context --current --namespace=turbonomic"""
                         sh """chmod a+x *.sh"""
@@ -54,11 +48,11 @@ pipeline {
                         //     returnStdout: true
                         // )
                         result= sh (
-                            script: "./monitor.sh ${username} ${password} ${noncriticalpods}",
+                            script: "./monitor.sh -u ${username} -p ${password} -s ${scripts} -n ${noncriticalpods}",
                             returnStdout: true
                         )
                         println "monitor result : $result"
-                    }}
+                    }
                 }
             }
         }
@@ -76,12 +70,26 @@ pipeline {
                         <title>Turbonomic Status Email</title>
                         <style>
                         body { font-family: 'verdana', monospace; font-size: 12;}
+                        table, th, td {
+                            border: 1px solid black;
+                            border-collapse: collapse;
+                        }
+                        th, td {
+                            padding: 5px;    
+                        }
+                        th {
+                        text-align: left
+                        }
+                        div {
+                            padding-bottom: 10px;
+                        }
+                        </style>
                     </head>
                     <body>
                     <div>
-                        <img src="./images/Turbo.png" alt="Turbonomic logo" />
                         $result
                     </body>
+                    </html>
 
                     """
 
