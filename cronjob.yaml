@@ -34,6 +34,6 @@ spec:
             secret:
               secretName: kube-secret
           - name: monitorconfig
-            configmap:
+            configMap:
               name: monitor-config
           restartPolicy: OnFailure
