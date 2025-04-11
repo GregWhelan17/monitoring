@@ -3,7 +3,6 @@
 DEFAULT_SCRIPTS_ORDER="pods pipeline stale actions targets"
 
 # get Jenkins environment variables
-# usage() { echo "Usage: $0 -u username -p password [-s scripts] [-n noncriticalpods]"; 1>&2; exit 10; }
 usage() { echo "Usage: $0 -t turbohost -u username -p password [-s scripts] [-n noncriticalpods]" ;}
 
 while getopts "t:u:p:s:n:h" o; do
@@ -18,7 +17,7 @@ while getopts "t:u:p:s:n:h" o; do
             password=$OPTARG
             ;;
         s)  
-            if [ "$OPTARG" == '' ] ; then
+            if [ -n "${OPTARG}" ] ; then
                 scripts=${DEFAULT_SCRIPTS_ORDER}
             else
                 scripts=$(echo $OPTARG | sed 's/,/ /g')
@@ -42,8 +41,7 @@ done
 bad=0
 
 for monitor in $scripts ; do
-    if [ "${monitor}" == "targets" ] ; then
-        # echo "targets.py"
+    if [ "${monitor}" = "targets" ] ; then
         result="$(python3 targets.py ${turbohost} ${username} ${password})"
         status=$?
         out="${out} ${result}"
@@ -55,7 +53,8 @@ for monitor in $scripts ; do
             bad=${status}
         fi
     else
-        # echo "${monitor}"
+        echo "${monitor}"
+	ls ${monitor}.sh
         result=$(./${monitor}.sh $noncriticalpods)
         status=$?
         out="${out} ${result}"
@@ -94,7 +93,8 @@ if [ ${bad} -ne 0 ] ; then
     echo '<ul>'
     for monitor in $scripts ; do
         if [ -f "${monitor}.out" ] ; then
-            echo '  <li><a href="#'${monitor}'_status">'${monitor^}' Status</a> </li>'
+            #echo '  <li><a href="#'${monitor}'_status">'${monitor^}' Status</a> </li>'
+            echo '  <li><a href="#'${monitor}'_status">'${monitor}' Status</a> </li>'
         fi
     done
     echo '</ul>'

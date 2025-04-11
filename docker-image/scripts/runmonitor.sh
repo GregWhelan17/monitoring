@@ -1,5 +1,6 @@
 #!/bin/sh
 
+cd $(dirname $0)
 echo 'Setting kubernets config'
 mkdir -p ~/.kube
 cp /kubeconfig/config ~/.kube/config
@@ -29,8 +30,7 @@ for f in /config/*/* ; do
 done
 
 
-
-echo "./monitor.sh -t ${turbohost} -u ${turbouser} -p ${turbopass} -s ${scripts} -n ${noncriticalpods}"
+echo 'Running monitors'
 result=$(./monitor.sh -t ${turbohost} -u ${turbouser} -p ${turbopass} -s ${scripts} -n ${noncriticalpods})
-
-echo "$result"
+echo "RETURNCODE: $?"
+echo "RESULT: $result"
