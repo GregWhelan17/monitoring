@@ -95,6 +95,6 @@ def prepare_message(message):
 tomail = "nick.freer@yahoo.co.uk,nick.freer@uk.ibm.com,nick.freer@ymail.com"
 envs=read_envs('/config')
 print(envs)
-msg_body=prepare_message(sys.argv[1])
+msg_body=prepare_message(' '.join(sys.argv))
 send_email(msg_body,tomail,envs)
 
