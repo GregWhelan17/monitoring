@@ -18,12 +18,6 @@ spec:
             imagePullPolicy: Always
             command:
             - /scripts/runmonitor.sh
-    #        env:
-    #        - name: TURBOPASS
-    #          valueFrom:
-    #            secretKeyRef:
-    #              name: actionscriptkeys
-    #              key: turbopass
             volumeMounts:
             - mountPath: /kubeconfig
               name: kubeconfig
@@ -31,7 +25,11 @@ spec:
               name: turbocreds
             - mountPath: /config/monitorconfig
               name: monitorconfig
+
           volumes:
+          - name: kubeconfig
+            secret:
+              secretName: kube-secret
           - name: kubeconfig
             secret:
               secretName: kube-secret

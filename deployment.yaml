@@ -27,12 +27,6 @@ spec:
       - name: turbomonitor
         image: quay.io/tivolinick/turbomonitor:0.1
         imagePullPolicy: Always
-#        env:
-#        - name: TURBOPASS
-#          valueFrom:
-#            secretKeyRef:
-#              name: actionscriptkeys
-#              key: turbopass
         volumeMounts:
         - mountPath: /kubeconfig
           name: kubeconfig
