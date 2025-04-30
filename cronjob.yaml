@@ -25,7 +25,8 @@ spec:
               name: turbocreds
             - mountPath: /config/monitorconfig
               name: monitorconfig
-
+            - mountPath: /config/smtp
+              name: turbonomic
           volumes:
           - name: kubeconfig
             secret:
@@ -39,4 +40,7 @@ spec:
           - name: monitorconfig
             configMap:
               name: monitor-config
+          - name: kubeconfig
+              secret:
+                secretName: smtp
           restartPolicy: OnFailure
