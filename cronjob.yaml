@@ -31,9 +31,6 @@ spec:
           - name: kubeconfig
             secret:
               secretName: kube-secret
-          - name: kubeconfig
-            secret:
-              secretName: kube-secret
           - name: turbocreds
             secret:
               secretName: turbo-creds
