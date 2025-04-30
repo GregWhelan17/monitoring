@@ -36,7 +36,17 @@ spec:
         volumeMounts:
         - mountPath: /kubeconfig
           name: kubeconfig
+        - mountPath: /config/turbonomic
+          name: turbonomic
+        - mountPath: /config/smtp
+          name: turbonomic
       volumes:
       - name: kubeconfig
         secret:
           secretName: kube-secret
+     - name: turbonomic
+        secret:
+          secretName: turbo-creds
+     - name: kubeconfig
+        secret:
+          secretName: smtp
