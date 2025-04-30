@@ -39,5 +39,5 @@ spec:
               name: monitor-config
           - name: smtp
             secret:
-              secretName: smtp
+              secretName: smtp-creds
           restartPolicy: OnFailure
