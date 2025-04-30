@@ -41,6 +41,6 @@ spec:
             configMap:
               name: monitor-config
           - name: kubeconfig
-              secret:
-                secretName: smtp
+            secret:
+              secretName: smtp
           restartPolicy: OnFailure
