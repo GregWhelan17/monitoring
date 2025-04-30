@@ -40,4 +40,4 @@ spec:
           - name: smtp
             secret:
               secretName: smtp-creds
-          restartPolicy: OnFailure
+          restartPolicy: Never
