@@ -24,7 +24,7 @@ for f in /config/*/* ; do
             turbouser=$(cat ${f})
             ;;
         *)
-            echo 'unexpected secret or configmap entry found'
+            echo 'additional secret or configmap entry ${f} found'
             ;;
     esac
 done
