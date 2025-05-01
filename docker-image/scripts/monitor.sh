@@ -44,8 +44,8 @@ for monitor in $scripts ; do
     if [ "${monitor}" = "targets" ] ; then
         result="$(python3 targets.py ${turbohost} ${username} ${password})"
         status=$?
-        out="${out} ${result}"
         if [ ${status} -gt 0 ] ; then
+            out="${out} ${result}"
             echo ${result} > targets.out
         fi
         # echo $monitor ${status}
@@ -57,8 +57,8 @@ for monitor in $scripts ; do
 	ls ${monitor}.sh
         result=$(./${monitor}.sh $noncriticalpods)
         status=$?
-        out="${out} ${result}"
         if [ ${status} -gt 0 ] ; then
+            out="${out} ${result}"
             echo ${result} > ${monitor}.out
         fi
         # echo $monitor ${status}
