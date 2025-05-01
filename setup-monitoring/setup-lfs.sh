@@ -19,3 +19,5 @@ if [ $? -eq 0 ] ; then
     curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | sudo bash
     sudo yum install -y git-lfs
 fi
+
+git lfs pull
