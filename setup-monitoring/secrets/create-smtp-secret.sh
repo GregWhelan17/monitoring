@@ -1,2 +1,7 @@
+. $(dirname $0)/values
 kubectl delete secret smtp-creds -n turbomonitor --ignore-not-found
-kubectl create secret generic smtp-creds -n turbomonitor --from-literal=smtp-host=smtp.mail.yahoo.com --from-literal=smtp-port=587 --from-literal=smtp-user=ndftest@yahoo.com --from-literal=smtp-pass='krghdvyskzshljfr' --from-literal=from-email=ndftest@yahoo.com --from-literal=to-email='nick.freer@yahoo.co.uk,nick.freer@uk.ibm.com,nick.freer@ymail.com'
+if [ -z "${smtp-pass}" ] ; then
+    kubectl create secret generic smtp-creds -n turbomonitor --from-literal=smtp-host=${smtp-host} --from-literal=smtp-port=${smtp-port} --from-literal=from-email=${from-email} --from-literal=to-email=${to-email}
+else
+    kubectl create secret generic smtp-creds -n turbomonitor --from-literal=smtp-host=${smtp-host} --from-literal=smtp-port=${smtp-port} --from-literal=from-email=${from-email} --from-literal=to-email=${to-email} --from-literal=smtp-user=${smtp-user} --from-literal=smtp-pass=${smtp-pass}
+fi

@@ -40,7 +40,8 @@ def send_email(message,to,envs):
 
     # Login to the Server
     print(f"User: {envs['smtp-user']}, Pass: {envs['smtp-pass']}")
-    server.login(envs['smtp-user'], envs['smtp-pass'])
+    if 'smtp-pass' in envs:
+        server.login(envs['smtp-user'], envs['smtp-pass'])
 
     # Compose the Email
     from_address = envs['from-email']
