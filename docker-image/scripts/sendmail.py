@@ -24,7 +24,7 @@ def send_email(message,to,envs):
     # Set Up the SMTP Server
     msg = MIMEMultipart('alternative')
     msg['From'] = envs['from-email']
-    msg['To'] = to
+    msg['To'] = envs['to-email']
     # msg['CC'] = params.get('email_cc', '')
     msg['Subject'] = "Turbonomic monitoring"
     msg.attach(MIMEText(message, 'html'))
@@ -44,7 +44,7 @@ def send_email(message,to,envs):
 
     # Compose the Email
     from_address = envs['from-email']
-    to_address = to.split(',')
+    to_address = envs['to-email'].split(',')
     subject = "Turbonomic monitoring"
     body = message
     subj = "hello"
@@ -92,9 +92,8 @@ def prepare_message(message):
     return html_message
 
 
-tomail = "nick.freer@yahoo.co.uk,nick.freer@uk.ibm.com,nick.freer@ymail.com"
 envs=read_envs('/config')
 print(envs)
 msg_body=prepare_message(' '.join(sys.argv))
-send_email(msg_body,tomail,envs)
+send_email(msg_body,envs)
 
