@@ -20,7 +20,7 @@ def read_envs(dir):
 
 # =turbomonitor@gregwhelan.co.uk  --from-literal=smtppass='Welcome123!'
 
-def send_email(message,to,envs):
+def send_email(message,envs):
     # Set Up the SMTP Server
     msg = MIMEMultipart('alternative')
     msg['From'] = envs['from-email']
