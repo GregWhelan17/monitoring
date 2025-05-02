@@ -31,7 +31,7 @@ done
 
 
 echo 'Running monitors'
-result=$(./monitor.sh -t ${turbohost} -u ${turbouser} -p ${turbopass} -s ${scripts} -n ${noncriticalpods} | sed 's/</<\n/g')
+result=$(./monitor.sh -t ${turbohost} -u ${turbouser} -p ${turbopass} -s ${scripts} -n ${noncriticalpods})
 echo "RETURNCODE: $?"
 echo ''
 echo "RESULT: $result"
