@@ -35,4 +35,4 @@ result=$(./monitor.sh -t ${turbohost} -u ${turbouser} -p ${turbopass} -s ${scrip
 echo "RETURNCODE: $?"
 echo "RESULT: $result"
 
-python3 sendmail.py ${result}
+python3 sendmail.py "${result}"
