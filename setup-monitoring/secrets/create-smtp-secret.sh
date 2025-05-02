@@ -1,0 +1,2 @@
+kubectl delete secret smtp-creds -n turbomonitor --ignore-not-found
+kubectl create secret generic smtp-creds -n turbomonitor --from-literal=smtp-host=smtp.mail.yahoo.com --from-literal=smtp-port=587 --from-literal=smtp-user=ndftest@yahoo.com --from-literal=smtp-pass='krghdvyskzshljfr' --from-literal=from-email=ndftest@yahoo.com --from-literal=to-email='nick.freer@yahoo.co.uk,nick.freer@uk.ibm.com,nick.freer@ymail.com'
