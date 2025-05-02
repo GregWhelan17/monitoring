@@ -33,6 +33,7 @@ done
 echo 'Running monitors'
 result=$(./monitor.sh -t ${turbohost} -u ${turbouser} -p ${turbopass} -s ${scripts} -n ${noncriticalpods} | sed 's/</<\n/g')
 echo "RETURNCODE: $?"
+echo ''
 echo "RESULT: $result"
 
 python3 sendmail.py "${result}"
