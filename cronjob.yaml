@@ -14,8 +14,8 @@ spec:
           - name: tivolinick-pull-secret
           containers:
           - name: turbomonitor
-            image: quay.io/tivolinick/turbomonitor:0.1
-            imagePullPolicy: Always
+            image: turbomonitor:0.1
+            imagePullPolicy: Never
             command:
             - /scripts/runmonitor.sh
             volumeMounts:
